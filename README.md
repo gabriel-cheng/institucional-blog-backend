@@ -4,48 +4,19 @@
 
 O site conta com um sistema de backend que, além de manipular paginas utilizando o gerenciador de templates Handlebars, também efetua requisições em uma API externa do antigo site da empresa, que está sendo utilizada para efetuar simulações de crédito.
 
-## 📋 Pré-requisitos
+<br>
 
-É essencial que você tenha o `Node.js` em sua máquina para rodar a aplicação.
-
-### `Instalação`
-
-1°- Faça um clone do repositório utilizando os comandos:
-```
-$git clone https://github.com/gabriel-cheng/institucional-citybens.git
-```
-
-2°- Dentro do diretório clonado, instale as dependências necessárias para que a aplicação consiga ser executada:
-```
-$npm install
-```
-ou
-```
-$yarn
-```
-
-3°- Dentro do diretório clonado, rode o seguinte comando para iniciar a aplicação:
-```
-$npm run start
-```
-ou
-```
-$yarn start
-```
 ### `Rota de acesso`
 
-## [http://localhost:3000](http://localhost:3000)
+## [http://localhost:5000/posts](http://localhost:5000/posts)
 
-<br>
 <br>
 
 ## 🛠️ Construído com
 
-* [Node.js](https://nodejs.org/en/) - Plataforma utilizada para o desenvolvimento do Backend;
-* [Handlebars](https://nodejs.org/en/) - Gerenciador de templates usado para controle de páginas
-* [Javascript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript) - Utilizado para desenvolver funcionalidades
+* [Node.js](https://nodejs.org/en/) - Plataforma utilizada para o desenvolvimento do Backend.
+* [Typescript](https://www.typescriptlang.org) - Linguagem principal utilizada para o desenvolvimento da aplicação.
 
 ## ✒️ Autores
 
-* **Gabriel Carvalho** - *Desenvolvimento da estrutura Backend/Frontend* - [Acessar protfólio](https://gabrielcarvalho.tech)
-* **Diogo Espindola** - *Contribuição na estruturação de estilo* - [Perfil Github](https://github.com/rissollis)
+* **Gabriel Carvalho** - *Desenvolvedor FullStack* - [Acessar protfólio](https://gabrielcarvalho.tech)

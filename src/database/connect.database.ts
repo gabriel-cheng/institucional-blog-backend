@@ -1,8 +1,10 @@
 /* eslint-disable indent */
-import { connect } from "mongoose";
+import { mongoose, connect } from "mongoose";
 import express from "express";
 const app = express();
 const port = process.env.PORT || 27017;
+
+mongoose.set("strictQuery", true);
 
 function MongoConnect() {
     connect(

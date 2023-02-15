@@ -1,18 +1,19 @@
 import { Request, Response } from "express";
 import Post from "../models/Blog.model";
+import fs from "fs";
 
 export default {
     deleteExistingPost: async(req: Request, res: Response) => {
         const id = req.params.id;
+        const postExists = await Post.findById(id);
+
+        if(!postExists) {
+            return res.status(404).json({message: "A postagem não foi encontrada!"});
+        }
 
         try {
-            const postExists = await Post.findById(id);
-
-            if(!postExists) {
-                return res.status(404).json({message: "A postagem não foi encontrada!"});
-            }
-
             await Post.deleteOne({_id: id});
+            fs.unlinkSync(postExists.pictureSrc);
 
             return res.status(200).json({message: "Postagem deletada com sucesso!"});
         } catch(err) {
@@ -47,14 +48,20 @@ export default {
         }
     },
     registerNewPost: async(req: Request, res: Response) => {
-        const { title, nameImage, shortDescription, description } = req.body;
+        const { title, shortDescription, description, pictureName } = req.body;
+        const file = req.file;
         const titleExist = await Post.findOne({title: title});
 
-        const newPostContains = {
+        if(!file) {
+            return res.status(400).json({message: "Você precisa informar uma imagem!"});
+        }
+
+        const newPost = {
             title,
-            nameImage,
             shortDescription,
-            description
+            description,
+            pictureName,
+            pictureSrc: file.path
         };
 
         if(!title) {
@@ -62,9 +69,6 @@ export default {
         }
         if(titleExist == title) {
             return res.status(400).json({message: "Já existe uma postagem com este título, por favor tente outro!"});
-        }
-        if(!nameImage) {
-            return res.status(400).json({message: "A imagem é obrigatória!"});
         }
         if(!shortDescription) {
             return res.status(400).json({message: "Uma descrição curta da postagem é obrigatória!"});
@@ -74,7 +78,7 @@ export default {
         }
 
         try {
-            await Post.create(newPostContains);
+            await Post.create(newPost);
 
             return res.status(201).json({message: "Postagem criada com sucesso!"});
         } catch(err) {

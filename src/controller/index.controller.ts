@@ -23,22 +23,41 @@ export default {
     },
     updateExistingPost: async(req: Request, res: Response) => {
         const id = req.params.id;
-        const { title, nameImage, shortDescription, description } = req.body;
+        const file = req.file;
+        const existingPost = await Post.findById(id);
 
-        const updatedPost = {
+        if(!existingPost) {
+            return res.status(404).json({message: "Postagem não encontrada!"});
+        }
+
+        interface iPostUpdate {
+            title?: string;
+            shortDescription?: string;
+            description?: string;
+            pictureName?: string;
+            pictureSrc?: string;
+        }
+
+        const {
             title,
-            nameImage,
             shortDescription,
             description
+        } = req.body;
+
+        const updatedPost: iPostUpdate = {
+            title,
+            shortDescription,
+            description,
         };
 
+        if(file) {
+            updatedPost.pictureName = file.filename;
+            updatedPost.pictureSrc = file.path;
+
+            fs.unlinkSync(existingPost.pictureSrc);
+        }
+
         try {
-            const existingPost = await Post.findById(id);
-
-            if(!existingPost) {
-                return res.status(404).json({message: "Postagem não encontrada!"});
-            }
-
             await Post.updateOne({_id: id}, updatedPost);
 
             return res.status(201).json({message: "Postagem atualizada com sucesso!"});

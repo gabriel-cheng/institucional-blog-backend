@@ -13,7 +13,8 @@ const postSchema = new Schema<iPostSchema>({
     shortDescription: {type: String, required: true},
     description: {type: String, required: true},
     pictureName: {type: String, required: true},
-    pictureSrc: {type: String, required: true}
+    pictureSrc: {type: String, required: true},
+    date: {type: Date, default: Date.now}
 });
 
 const Post = model("Post", postSchema);

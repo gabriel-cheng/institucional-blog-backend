@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-import { mongoose, connect } from "mongoose";
+import mongoose from "mongoose";
 import express from "express";
 const app = express();
 const port = process.env.PORT || 27017;
@@ -7,7 +7,7 @@ const port = process.env.PORT || 27017;
 mongoose.set("strictQuery", true);
 
 function MongoConnect() {
-    connect(
+    mongoose.connect(
         `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.n087j7g.mongodb.net/?retryWrites=true&w=majority`
     )
     .then(() => {

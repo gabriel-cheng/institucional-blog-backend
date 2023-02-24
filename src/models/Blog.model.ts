@@ -5,7 +5,8 @@ interface iPostSchema {
     shortDescription: string,
     description: string,
     pictureName: string,
-    pictureSrc: string
+    pictureSrc: string,
+    date: Date
 }
 
 const postSchema = new Schema<iPostSchema>({

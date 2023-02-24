@@ -1,6 +1,6 @@
 # Specifics
 docs/
-public/uploads/
+public/uploads/*.{png,jpg,jpeg,PNG}
 
 # Logs
 logs

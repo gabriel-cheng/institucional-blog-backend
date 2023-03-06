@@ -1,11 +1,14 @@
 import dotenv from "dotenv";
 dotenv.config();
+import cors from "cors";
 import express from "express";
 const app = express();
 import router from "./router/index.router";
 import user from "./router/user.router";
 import MongoConnect from "./database/connect.database";
 import path from "path";
+
+app.use(cors());
 
 MongoConnect();
 

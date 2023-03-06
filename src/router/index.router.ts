@@ -1,11 +1,8 @@
 import express from "express";
-import cors from "cors";
 import controller from "../controller/index.controller";
 import upload from "../config/multer.config";
 import authMiddleware from "../middlewares/auth.middleware";
 const router = express.Router();
-
-router.use(cors());
 
 router.delete("/delete/:id", authMiddleware.checkAuthentication, controller.deleteExistingPost);
 router.patch("/update/:id", authMiddleware.checkAuthentication, upload.single("file"), controller.updateExistingPost);
